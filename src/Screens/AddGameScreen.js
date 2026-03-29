@@ -1,9 +1,11 @@
-import React, {useId, useState} from "react";
-import {View, Text, TouchableOpacity, KeyboardAvoidingView, ScrollView, Alert} from "react-native";
-import { TextInput } from "react-native-gesture-handler";
+import React, { useState} from "react";
+import { View, Text, 
+    TouchableOpacity, 
+    KeyboardAvoidingView, 
+    ScrollView, Alert, Platform, 
+    TextInput, StyleSheet } from "react-native";
 import { SafeAreaView} from 'react-native-safe-area-context';
 
-//Ftítulo, plataforma, género, precio y clasificación de edad del videojuego.
 const AddGameScreen = ({navigation}) => {
 
     const [title, setTitle] = useState("");
@@ -13,11 +15,16 @@ const AddGameScreen = ({navigation}) => {
     const [ageRating, setAgeRating] = useState("");
 
     const validateForm = () => {
-        if(!title.trim() || !price.trim() || !price.trim() 
-        || !ageRating.trim() || !platform.trim() || !genre.trim()){
+        if(!title.trim() 
+            || !price.trim() 
+            || !price.trim() 
+            || !ageRating.trim() 
+            || !platform.trim() 
+            || !genre.trim()){
             Alert.alert("ingresa todos los campos");
             return;
         }
+        Alert.alert("juego agregado");
 
         navigation.navigate("GameListScreen",
             {newGame: {
@@ -28,22 +35,23 @@ const AddGameScreen = ({navigation}) => {
                 price,
                 ageRating
 
-            }
+            },
         });
-    } 
+    }; 
        
     return(
         <SafeAreaView>
             <KeyboardAvoidingView className = "flex-1 bg-pink-100 px-4 py-6" behavior={Platform.OS === "ios" ? "padding" : "height"}>
                 <ScrollView>
-                    <Text>agregacion de juegos</Text>
-
+                    <Text>agregar juego</Text>
+                <View>
                     <Text>titulo</Text>
                     <TextInput
                         placeholder="Ej: Casa barbie"
                         value={title}
                         onChangeText={setTitle}
                     />
+                </View>
 
                     <Text>plataforma</Text>
                     
@@ -72,8 +80,9 @@ const AddGameScreen = ({navigation}) => {
                         onChangeText={setAgeRating}
                     />
 
-                    <TouchableOpacity>
-                        <Text onPress={validateForm}>agregar rel juego</Text>
+                    <TouchableOpacity
+                         onPress={validateForm}>
+                        <Text>agregar el juego</Text>
                     </TouchableOpacity>
                 </ScrollView>
             </KeyboardAvoidingView>
@@ -82,3 +91,4 @@ const AddGameScreen = ({navigation}) => {
     )
 }
 export default AddGameScreen;
+
