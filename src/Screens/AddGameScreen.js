@@ -1,10 +1,10 @@
-import React, {useState} from "react";
+import React, {useId, useState} from "react";
 import {View, Text, TouchableOpacity, KeyboardAvoidingView, ScrollView, Alert} from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import { SafeAreaView} from 'react-native-safe-area-context';
 
 //Ftítulo, plataforma, género, precio y clasificación de edad del videojuego.
-const AddGameScreen = ({navigation, route}) => {
+const AddGameScreen = ({navigation}) => {
 
     const [title, setTitle] = useState("");
     const [platform, setPlatform] = useState("");
@@ -21,6 +21,7 @@ const AddGameScreen = ({navigation, route}) => {
 
         navigation.navigate("GameListScreen",
             {newGame: {
+                id: Date.now().toString(),
                 title,
                 platform,
                 genre,
@@ -33,7 +34,7 @@ const AddGameScreen = ({navigation, route}) => {
        
     return(
         <SafeAreaView>
-            <KeyboardAvoidingView className = "flex-1">
+            <KeyboardAvoidingView className = "flex-1 bg-pink-100 px-4 py-6" behavior={Platform.OS === "ios" ? "padding" : "height"}>
                 <ScrollView>
                     <Text>agregacion de juegos</Text>
 

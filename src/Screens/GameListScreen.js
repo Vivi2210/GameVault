@@ -22,11 +22,14 @@ const GameListScreen = ({navigation, route}) => {
         return (
             <TouchableOpacity
                 onPress={() => setTypeSelectedGame(item)}
+                className={`p-4 mb-3 rounded-2xl bg-white shadow-sm border-2 ${
+                    selected ? 'border-pink-500' : 'border-transparent'
+                }`}
             >
                 <View>
-                    <Text>{item.title}</Text>
-                    <Text>{item.description}</Text>
-                    <Text>{item.price}</Text>
+                    <Text className="text-lg font-bold">{item.title}</Text>
+                    <Text className="text-gray-600">{item.description}</Text>
+                    <Text className="text-pink-500 font-bold">${item.price.toFixed(2)}</Text>
                 </View>
             </TouchableOpacity>
         )
@@ -39,8 +42,20 @@ const GameListScreen = ({navigation, route}) => {
     return (
         <SafeAreaView className="flex-1 bg-pink-100">
             <View className="flex-1 px-4 py-6">
-                <Text>Plantilla de juegos</Text>
-                <Text>Selecciona un juego para ver su detalle</Text>
+                <View>
+                    <Text>Plantilla de juegos</Text>
+                    <Text>Selecciona un juego para ver su detalle</Text>
+                </View>
+                
+                <View>
+                    <TouchableOpacity 
+                        onPress={() => navigation.navigate('AddGameScreen')}
+                        className="bg-pink-500 p-3 rounded-full shadow-lg"
+                    >
+                        <Text className="text-white font-bold"> agregar kjuego</Text>
+                    </TouchableOpacity>
+                </View>
+
                 <FlatList
                     data={typeGame}
                     renderItem={renderType}
