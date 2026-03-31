@@ -3,8 +3,9 @@ import { View, Text,
     TouchableOpacity, 
     KeyboardAvoidingView, 
     ScrollView, Alert, Platform, 
-    TextInput, StyleSheet } from "react-native";
+    TextInput } from "react-native";
 import { SafeAreaView} from 'react-native-safe-area-context';
+import styles from '../Styles/AddGameStyles';
 
 const AddGameScreen = ({navigation}) => {
 
@@ -17,10 +18,11 @@ const AddGameScreen = ({navigation}) => {
     const validateForm = () => {
         if(!title.trim() 
             || !price.trim() 
-            || !price.trim() 
             || !ageRating.trim() 
             || !platform.trim() 
-            || !genre.trim()){
+            || !genre.trim())
+            {
+
             Alert.alert("ingresa todos los campos");
             return;
         }
@@ -40,50 +42,82 @@ const AddGameScreen = ({navigation}) => {
     }; 
        
     return(
-        <SafeAreaView>
-            <KeyboardAvoidingView className = "flex-1 bg-pink-100 px-4 py-6" behavior={Platform.OS === "ios" ? "padding" : "height"}>
+        <SafeAreaView style= {styles.container}>
+            <KeyboardAvoidingView style= {styles.keyboardView}
+            behavior={Platform.OS === "ios" ? "padding" : "height"}
+            >
                 <ScrollView>
-                    <Text>agregar juego</Text>
-                <View>
-                    <Text>titulo</Text>
+                    <Text style={styles.header}>agregar juego</Text>
+                <View style ={styles.inputGroup}>
+
+                    <Text style= {styles.label}>titulo</Text>
                     <TextInput
+                        style = {styles.input}
                         placeholder="Ej: Casa barbie"
                         value={title}
                         onChangeText={setTitle}
                     />
                 </View>
-
-                    <Text>plataforma</Text>
+                <View style ={styles.inputGroup}>
+                    <Text style ={styles.label}>plataforma</Text>
                     
                     <TextInput
+                        style={styles.input}
                         placeholder="Ej: PlayStation 5"
                         value={platform}
                         onChangeText={setPlatform}
                     />
-                    <Text>genero</Text>
+                </View>
+
+                <View style ={styles.inputGroup}>
+                    <Text style={styles.label}>genero</Text>
                     <TextInput
+                        style = {styles.input}
                         placeholder="Ej: Accion"
                         value={genre}
                         onChangeText={setGenre}
                     />
-                    <Text>precio</Text>
+                </View>
+
+                <View style ={styles.inputGroup}>
+                    <Text style = {styles.label}>precio</Text>
                     <TextInput
+                        style = {styles.input}
                         placeholder="Ej: $27.999"
                         value={price}
                         onChangeText={setPrice}
                     />
+                </View>
 
-                    <Text>clasificacion de edad</Text>
+                <View style ={styles.inputGroup}>
+                    <Text style = {styles.label}>clasificacion de edad</Text>
                     <TextInput
+                        style = {styles.input}
                         placeholder="Ej: E"
                         value={ageRating}
                         onChangeText={setAgeRating}
                     />
+                </View>
+                    <TouchableOpacity
+                    style= {styles.addButton}
+                         onPress={validateForm}>
+                        <Text style={styles.addButtonText}>agregar el juego</Text>
+                    </TouchableOpacity>
 
                     <TouchableOpacity
-                         onPress={validateForm}>
-                        <Text>agregar el juego</Text>
+                        style={styles.clearButton}
+                        onPress={() => {
+                            setTitle("");
+                            setPlatform("");
+                            setGenre("");
+                            setPrice("");
+                            setAgeRating("");
+                        }}
+                        >
+                            <Text style={styles.clearButtonText}>Limpiar</Text>
                     </TouchableOpacity>
+
+
                 </ScrollView>
             </KeyboardAvoidingView>
         </SafeAreaView>

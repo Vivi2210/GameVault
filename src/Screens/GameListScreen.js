@@ -3,6 +3,7 @@ import { View, Text, FlatList, TouchableOpacity} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {typeGame} from '../Data/gameData';
 import { Button } from 'react-native';
+import styles from '../Styles/GameListStyles'
 
 
 const GameListScreen = ({navigation, route}) => {
@@ -22,14 +23,15 @@ const GameListScreen = ({navigation, route}) => {
         return (
             <TouchableOpacity
                 onPress={() => setTypeSelectedGame(item)}
-                className={`p-4 mb-3 rounded-2xl bg-white shadow-sm border-2 ${
-                    selected ? 'border-pink-500' : 'border-transparent'
-                }`}
+                style = {[
+                    styles.card,
+                    selected && styles.cardSelected
+                ]}
             >
                 <View>
-                    <Text className="text-lg font-bold">{item.title}</Text>
-                    <Text className="text-gray-600">{item.description}</Text>
-                    <Text className="text-pink-500 font-bold">${item.price.toFixed(2)}</Text>
+                    <Text style={styles.cardTitle}>{item.title}</Text>
+                    <Text style={styles.cardDescription}>{item.description}</Text>
+                    <Text style={styles.cardPrice}>${item.price}</Text>
                 </View>
             </TouchableOpacity>
         )
@@ -40,19 +42,18 @@ const GameListScreen = ({navigation, route}) => {
         }
     }    
     return (
-        <SafeAreaView className="flex-1 bg-pink-100">
-            <View className="flex-1 px-4 py-6">
-                <View>
-                    <Text>Plantilla de juegos</Text>
-                    <Text>Selecciona un juego para ver su detalle</Text>
+        <SafeAreaView style={styles.container}>
+            <View style={styles.content}>
+                <View style={styles.header}>
+                    <Text style={styles.headerTitle}>Plantilla de juegos</Text>
+                    <Text style={styles.headerSubtitle}>Selecciona un juego para ver su detalle</Text>
                 </View>
                 
                 <View>
                     <TouchableOpacity 
                         onPress={() => navigation.navigate('AddGameScreen')}
-                        className="bg-pink-500 p-3 rounded-full shadow-lg"
+                        style={styles.addButton}
                     >
-                        <Text className="text-white font-bold"> agregar kjuego</Text>
                     </TouchableOpacity>
                 </View>
 
@@ -67,7 +68,7 @@ const GameListScreen = ({navigation, route}) => {
                     onPress={handleContinue}
                     disabled={!typeSelectedGame}
                     title="Continuar"
-                    className="bg-pink-500 py-3 px-4 rounded-lg mt-6" 
+                    color="#e91e63"
                 />
             </View>
         </SafeAreaView>

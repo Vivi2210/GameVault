@@ -2,6 +2,7 @@ import React, { useEffect, useState} from 'react';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import { gamingNews } from '../Data/gamingNewsData';
+import styles from '../Styles/GamingNewsStyles';
 
 const GamingNewsScreen = ({}) => {
 
@@ -35,15 +36,3 @@ const GamingNewsScreen = ({}) => {
 };
 
 export default GamingNewsScreen;
-
-const styles = StyleSheet.create({
-    container: {flex: 1, padding: 16},
-    card: {
-        padding: 16,
-        marginVertical: 8,
-        bagroundColor: "#ab5eab",
-        borderRadius: 8,
-    },
-    title: {fontSize: 18, fontWeight: 'bold', marginBottom: 8,},
-    description: {fontSize: 14, color: '#7356f2',},
-});
